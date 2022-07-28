@@ -1,0 +1,27 @@
+[
+  {
+    "name": "P1",
+    "categoryName": "Category 1",
+    "price": 20
+  },
+  {
+    "name": "Product 2",
+    "categoryName": "Category 1",
+    "price": 250
+  },
+  {
+    "name": "Product 3",
+    "categoryName": "Category 2",
+    "price": -35
+  },
+  {
+    "name": "P4",
+    "categoryName": "Category 2",
+    "price": 1000
+  },
+  {
+    "name": "Product 50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "categoryName": "Category 5",
+    "price": 100
+  }
+]

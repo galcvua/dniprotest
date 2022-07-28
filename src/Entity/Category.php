@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\HasLifecycleCallbacks()]
+#[ApiResource()]
 class Category
 {
     #[ORM\Id]
@@ -15,7 +20,14 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 12)]
+    #[ORM\Column(length: 12, name:"name", options:["check"=>"length(name) between 3 and 12"])]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 3,
+        max: 12,
+        minMessage: 'Category name must be at least {{ limit }} characters long',
+        maxMessage: 'Category name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
@@ -26,12 +38,9 @@ class Category
         $this->products = new ArrayCollection();
     }
 
-    public function fromArray(array $arr) {
-        $this->name = $arr['name'] ?? '';
-    }
-
-    public function test() {
-        echo "Test!";
+    #[ORM\PrePersist]
+    public function prePersist() {
+        //Another way to validations
     }
 
     public function getId(): ?int

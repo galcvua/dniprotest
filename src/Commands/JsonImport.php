@@ -7,11 +7,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * Base class to performs import operations.
+ */
 abstract class JsonImport extends Command
 {
-    protected $entity;
     protected ManagerRegistry $doctrine;
-    protected abstract function fillItem(array $arr):object;
+
+    /**
+     * This method should be return filled object, or null, if validation failed.
+     */
+    protected abstract function fillItem(array $arr):object|null;
 
     protected function configure()
     {
@@ -43,8 +49,12 @@ abstract class JsonImport extends Command
         $em = $this->doctrine->getManager();
         foreach($data as $arr) {
             $item = $this->fillItem($arr);
-            $em->persist($item);
-            $output->writeln( sprintf('New item added "%s"', $item->getName()) );
+            if(is_null($item)) {
+                $output->writeln( sprintf('Validation failed, skipped. "%s"', json_encode($arr)) );
+            } else {
+                $em->persist($item);
+                $output->writeln( sprintf('New item added "%s"', $item->getName()) );
+            }
         }
         $em->flush();
 
