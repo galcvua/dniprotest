@@ -1,7 +1,13 @@
 # DNIPROTEST
 Symfony 5 (php 8) Api Rest application.
 ## Installation
-Clone the project from github or unpack the archive with the project. Go to your project folder, and edit DATABASE_URL in .env file if PostgreSQL is installed locally.
+Clone the project from github or unpack the archive with the project. 
+Install dependencies, run
+```console
+symfony composer install
+```
+
+Go to your project folder, and edit DATABASE_URL in .env file if PostgreSQL is installed locally.
 If you are using docker, skip the previous step and just run 
 ```console
 docker-compose up database -d 
