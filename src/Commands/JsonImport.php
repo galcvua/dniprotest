@@ -7,8 +7,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * Base class to performs import operations.
+ * 
  */
 abstract class JsonImport extends Command
 {
@@ -24,7 +26,7 @@ abstract class JsonImport extends Command
         $this->addArgument('filename', InputArgument::REQUIRED, 'Pass the json file.');
     }
  
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output):int
     {
         $fileName = $input->getArgument('filename');
 

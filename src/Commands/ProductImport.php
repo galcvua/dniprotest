@@ -11,6 +11,10 @@ use App\Entity\{Product, Category};
 use App\Repository\CategoryRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Import products from json file.
+ * 
+ */
 #[AsCommand(
     name: 'product:import',
     description: 'Import products from a json file',

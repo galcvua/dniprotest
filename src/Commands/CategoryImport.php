@@ -10,6 +10,10 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Category;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Import categories from json file.
+ * 
+ */
 #[AsCommand(
     name: 'category:import',
     description: 'Import categories from a json file',
